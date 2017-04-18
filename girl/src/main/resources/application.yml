@@ -1,3 +1,5 @@
 server:
- port: 8082
- context-path: /girl
+ port: 8080
+cupSize: B
+age: 18
+content: "cupSize: ${cupSize}, age: ${age}"
