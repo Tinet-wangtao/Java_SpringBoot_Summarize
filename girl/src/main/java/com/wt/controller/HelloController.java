@@ -2,8 +2,11 @@ package com.wt.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.wt.model.GirlProperties;
@@ -64,5 +67,31 @@ public class HelloController {
 		// 呈现打印model中属性的结果
 		return "/mappingOne & Two" + "cupSize : " + girlProperties.getCupSize() 
 		+ " age : " + girlProperties.getAge(); 
+	}
+	
+	
+	// 使用组合注解
+	@RequestMapping(value = "/groupMappingOne/{id}", method = RequestMethod.GET)
+	public String GroupMappingOne(@PathVariable("id") Integer id) {
+		return "GroupMapping id :  " + id;
+	}
+	
+	@RequestMapping(value = "/{id}/groupMappingTwo", method = RequestMethod.GET)
+	public String GroupMappingTwo(@PathVariable("id") Integer id) {
+		return "GroupMapping id :  " + id;
+	}
+	
+	// 此时访问的URL举例：http://localhost:8080/hi/RequestParmTest?id=1548
+	// require 是否必须传递，defaultValue 为不填写时显示的默认值
+	@RequestMapping(value = "/RequestParmTest", method = RequestMethod.GET)
+	public String RequestParmTest(@RequestParam(value = "id", required = false, defaultValue = "0") Integer myId) {
+		return "GroupMapping id :  " + myId;
+	}
+	
+	// 简化书写的注解
+	// 以下的显示效果等同于@RequestMapping(value = "/easyMapping", method = RequestMethod.GET)
+	@GetMapping(value = "easyMapping")
+	public String EasyMapping(@RequestParam(value = "id", required = false, defaultValue = "0") Integer myId) {
+		return "EasyMapping id :  " + myId;
 	}
 }
