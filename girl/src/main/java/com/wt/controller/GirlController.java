@@ -2,7 +2,6 @@ package com.wt.controller;
 
 import java.util.List;
 
-import javax.persistence.criteria.CriteriaBuilder.In;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,7 +40,7 @@ public class GirlController {
 	 * @return
 	 */
 	@GetMapping(value = "/girls")
-	public List<Girl> giList() {
+	public List<Girl> girlList() {
 
 		return girlRepository.findAll();
 
