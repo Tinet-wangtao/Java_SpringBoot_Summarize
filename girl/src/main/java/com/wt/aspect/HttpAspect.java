@@ -1,5 +1,6 @@
 package com.wt.aspect;
 
+import org.aspectj.lang.annotation.After;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.springframework.stereotype.Component;
@@ -20,8 +21,14 @@ public class HttpAspect {
 	// execution(public * com.wt.controller.GirlController.*(..))
 	// 这上边中的*表示此时会拦截GirlController下所有的方法
 	@Before("execution(public * com.wt.controller.GirlController.*(..))")
-	public void log(){
+	public void doBefore(){
 		System.out.println(11111111);
+	}
+	
+	
+	@After("execution(public * com.wt.controller.GirlController.*(..))")
+	public void doAfter(){
+		System.out.println(22222222);
 	}
 	
 }
