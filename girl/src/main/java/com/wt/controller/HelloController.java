@@ -54,7 +54,8 @@ public class HelloController {
 	@RequestMapping(value = "/hello", method = RequestMethod.GET)
 	public String Hello() {
 		// 呈现打印model中属性的结果
-		return "cupSize : " + girlProperties.getCupSize(); 
+		return "cupSize : " + girlProperties.getCupSize() 
+		+ " age : " + girlProperties.getAge(); 
 	}
 
 }
