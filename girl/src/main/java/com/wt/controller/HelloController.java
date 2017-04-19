@@ -14,28 +14,29 @@ import com.wt.model.GirlProperties;
  *
  */
 @RestController
+@RequestMapping("/hi")
 public class HelloController {
 	
-	// ÒÔÏÂÎªÊ¹ÓÃÆÕÍ¨×¢Èë½øĞĞµÄ²âÊÔ
+	// ä»¥ä¸‹ä¸ºä½¿ç”¨æ™®é€šæ³¨å…¥è¿›è¡Œçš„æµ‹è¯•
 	/*
 	@Value("${cupSize}")
-	private String cupSize; // ÅäÖÃÎÄ¼şÖĞµÄÊôĞÔ×¢Èëµ½¸ÃÎÄ¼şÖĞ
+	private String cupSize; // é…ç½®æ–‡ä»¶ä¸­çš„å±æ€§æ³¨å…¥åˆ°è¯¥æ–‡ä»¶ä¸­
 	
-	// ÅäÖÃÎÄ¼şÖĞ²»ĞèÒª¹ØĞÄÊôĞÔµÄÀàĞÍ£¬Ö»ĞèÒªÔÚ×¢ÈëÊ±½øĞĞÉùÃ÷¼´¿É
-	// ÒÔÏÂÊôĞÔµÄ×¢ÈëÓëÖ®Ç°µÄÀàËÆ£¬ÒÔ´ËÀàÍÆ
+	// é…ç½®æ–‡ä»¶ä¸­ä¸éœ€è¦å…³å¿ƒå±æ€§çš„ç±»å‹ï¼Œåªéœ€è¦åœ¨æ³¨å…¥æ—¶è¿›è¡Œå£°æ˜å³å¯
+	// ä»¥ä¸‹å±æ€§çš„æ³¨å…¥ä¸ä¹‹å‰çš„ç±»ä¼¼ï¼Œä»¥æ­¤ç±»æ¨
 	@Value("${age}")
 	private Integer age;
 	
-	// ÁíÒ»ÖÖ»ñÈ¡×¢ÈëµÄĞÎÊ½£¬Ö÷ÒªµÄÇø±ğÔÚÓÚymlÅäÖÃÎÄ¼ş
-	// ÈçºÎÔÚÅäÖÃÖĞĞ´ÅäÖÃ
+	// å¦ä¸€ç§è·å–æ³¨å…¥çš„å½¢å¼ï¼Œä¸»è¦çš„åŒºåˆ«åœ¨äºymlé…ç½®æ–‡ä»¶
+	// å¦‚ä½•åœ¨é…ç½®ä¸­å†™é…ç½®
 	@Value("${content}")
 	private String content;
 	
 	
 	@RequestMapping(value = "/hello", method = RequestMethod.GET)
 	public String Hello() {
-		// ´ËÊ±´òÓ¡µÄÖµÓ¦Îª B
-		return "ÒÔÏÂÎª´òÓ¡×¢ÈëµÄÊôĞÔÖµÓÃÀ´½øĞĞ²âÊÔ  " + "cupSize: " + cupSize
+		// æ­¤æ—¶æ‰“å°çš„å€¼åº”ä¸º B
+		return "ä»¥ä¸‹ä¸ºæ‰“å°æ³¨å…¥çš„å±æ€§å€¼ç”¨æ¥è¿›è¡Œæµ‹è¯•  " + "cupSize: " + cupSize
 				+ "  age: " + age; 
 	}
 	
@@ -46,16 +47,22 @@ public class HelloController {
 	*/
 	
 	
-	// Ê¹ÓÃmodelÒ»¸öÕûÌåµÄÀàÀ´½øĞĞ×¢ÈëµÄ´úÂëÊ¾Àı£¬Çø±ğÈ¥Ö®Ç°ÅäÖÃÎÄ¼şÖĞµ¥¸öÊôĞÔÖµÌí¼Ó×¢ÈëµÄ·±Ëö
+	// ä½¿ç”¨modelä¸€ä¸ªæ•´ä½“çš„ç±»æ¥è¿›è¡Œæ³¨å…¥çš„ä»£ç ç¤ºä¾‹ï¼ŒåŒºåˆ«å»ä¹‹å‰é…ç½®æ–‡ä»¶ä¸­å•ä¸ªå±æ€§å€¼æ·»åŠ æ³¨å…¥çš„ç¹ç
 	@Autowired
 	private GirlProperties girlProperties;
 	
 	
 	@RequestMapping(value = "/hello", method = RequestMethod.GET)
 	public String Hello() {
-		// ³ÊÏÖ´òÓ¡modelÖĞÊôĞÔµÄ½á¹û
+		// å‘ˆç°æ‰“å°modelä¸­å±æ€§çš„ç»“æœ
 		return "cupSize : " + girlProperties.getCupSize() 
 		+ " age : " + girlProperties.getAge(); 
 	}
 
+	@RequestMapping(value = {"/mappingOne", "/mappingTwo"}, method = RequestMethod.GET)
+	public String TwoMapping() {
+		// å‘ˆç°æ‰“å°modelä¸­å±æ€§çš„ç»“æœ
+		return "/mappingOne & Two" + "cupSize : " + girlProperties.getCupSize() 
+		+ " age : " + girlProperties.getAge(); 
+	}
 }

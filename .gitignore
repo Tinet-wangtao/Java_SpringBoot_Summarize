@@ -3,5 +3,7 @@
 RemoteSystemsTempFiles/
 Servers/
 maven-seckill-webapp/target/
-
+girl/.classpath
+girl/.settings
+gir/.project
 

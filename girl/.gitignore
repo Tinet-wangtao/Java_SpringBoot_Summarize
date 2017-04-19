@@ -1,1 +1,9 @@
+.metadata/
+RemoteSystemsTempFiles/
+Servers/
+maven-seckill-webapp/target/
 /target/
+
+.settings
+.classpath
+.project
