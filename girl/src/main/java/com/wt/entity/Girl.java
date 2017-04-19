@@ -4,6 +4,7 @@ import javax.annotation.Generated;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.validation.constraints.Min;
 
 /**
  * 
@@ -22,6 +23,7 @@ public class Girl {
 
 	private String cupSize;
 
+	@Min(value = 18, message = "未成年不得入内！")
 	private Integer age;
 
 	public Girl() {

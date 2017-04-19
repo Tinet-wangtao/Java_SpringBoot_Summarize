@@ -3,8 +3,10 @@ package com.wt.controller;
 import java.util.List;
 
 import javax.persistence.criteria.CriteriaBuilder.In;
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -67,11 +69,23 @@ public class GirlController {
 	 * 
 	 * @return
 	 */
+	// 添加进行对girl进行验证
+	// 将返回的结果放入到bindingResult对象中
 	@PostMapping(value = "/girlsAddNew")
-	public Girl girlAddNew(Girl girl){
+	public Girl girlAddNew(@Valid Girl girl, BindingResult bindingResult){
 //		girl.setCupSize(girl.getCupSize());
 //		girl.setAge(girl.getAge());
 
+		// 如果验证错误，将把错误的信息打印出来
+		// 此时打印的错误信息为 Girl 实体类中对age进行Min验证限制时写入的错误信息
+		if(bindingResult.hasErrors()){
+			System.out.println("bindingResult error message : " + bindingResult.getFieldError().getDefaultMessage());
+			
+			// 既然发生了错误，那么就应该不继续接下来的逻辑
+			return null;
+			
+		}
+		
 		return girlRepository.save(girl);
 	}
 
