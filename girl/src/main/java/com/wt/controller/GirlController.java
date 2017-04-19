@@ -61,6 +61,19 @@ public class GirlController {
 
 		return girlRepository.save(girl);
 	}
+	
+	/**
+	 * 优雅的添加一个女生的方法，简化复杂参数的冗余
+	 * 
+	 * @return
+	 */
+	@PostMapping(value = "/girlsAddNew")
+	public Girl girlAddNew(Girl girl){
+//		girl.setCupSize(girl.getCupSize());
+//		girl.setAge(girl.getAge());
+
+		return girlRepository.save(girl);
+	}
 
 	/**
 	 * 根据Id查询女生
