@@ -1,9 +1,12 @@
 package com.wt.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.wt.model.GirlProperties;
 
 /**
  * 
@@ -13,6 +16,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class HelloController {
 	
+	// 以下为使用普通注入进行的测试
+	/*
 	@Value("${cupSize}")
 	private String cupSize; // 配置文件中的属性注入到该文件中
 	
@@ -37,6 +42,19 @@ public class HelloController {
 	@RequestMapping(value = "/helloContent", method = RequestMethod.GET)
 	public String HelloContent(){
 		return "content : " + content;
+	}
+	*/
+	
+	
+	// 使用model一个整体的类来进行注入的代码示例，区别去之前配置文件中单个属性值添加注入的繁琐
+	@Autowired
+	private GirlProperties girlProperties;
+	
+	
+	@RequestMapping(value = "/hello", method = RequestMethod.GET)
+	public String Hello() {
+		// 呈现打印model中属性的结果
+		return "cupSize : " + girlProperties.getCupSize(); 
 	}
 
 }
