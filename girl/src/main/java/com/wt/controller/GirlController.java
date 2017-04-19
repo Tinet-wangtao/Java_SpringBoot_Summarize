@@ -2,6 +2,8 @@ package com.wt.controller;
 
 import java.util.List;
 
+import javax.persistence.criteria.CriteriaBuilder.In;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.wt.entity.Girl;
 import com.wt.repository.GirlRepository;
+import com.wt.service.GirlService;
 
 /**
  * 
@@ -26,7 +29,10 @@ public class GirlController {
 
 	@Autowired
 	private GirlRepository girlRepository;
-
+	
+	@Autowired
+	private GirlService girlService;
+	
 	/**
 	 * 查询所有的女生列表
 	 * 
@@ -46,7 +52,7 @@ public class GirlController {
 	 * @param age
 	 * @return
 	 */
-	@PostMapping(value = "girls")
+	@PostMapping(value = "/girls")
 	public Girl girlAdd(@RequestParam("cupSize") String cupSize, @RequestParam("age") Integer age) {
 
 		Girl girl = new Girl();
@@ -94,5 +100,23 @@ public class GirlController {
 	public void updateGirl(@PathVariable("id") Integer id) {
 		girlRepository.delete(id);
 	}
+	
+	
+	/**
+	 * 通过年龄查询女生列表
+	 * 
+	 * @return
+	 */
+	@GetMapping(value = "/girls/age/{age}")
+	public List<Girl> giListByAge(@PathVariable("age") Integer age) {
 
+		return girlRepository.findByAge(age);
+
+	}
+
+	@PostMapping(value = "/girls/insertTwo")
+	public void girlTwo(){
+		girlService.insertTwo();
+	}
+	
 }
