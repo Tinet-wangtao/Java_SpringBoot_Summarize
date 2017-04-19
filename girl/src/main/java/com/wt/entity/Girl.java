@@ -54,4 +54,10 @@ public class Girl {
 		this.age = age;
 	}
 
+	// 添加一个toString方法
+	@Override
+	public String toString() {
+		return "Girl [id=" + id + ", cupSize=" + cupSize + ", age=" + age + "]";
+	}
+
 }

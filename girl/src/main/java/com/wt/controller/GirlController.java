@@ -4,6 +4,8 @@ import java.util.List;
 
 import javax.validation.Valid;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -14,6 +16,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.wt.aspect.HttpAspect;
 import com.wt.entity.Girl;
 import com.wt.repository.GirlRepository;
 import com.wt.service.GirlService;
@@ -34,6 +37,9 @@ public class GirlController {
 	@Autowired
 	private GirlService girlService;
 	
+	private final static Logger logger = LoggerFactory.getLogger(GirlController.class);
+
+	
 	/**
 	 * 查询所有的女生列表
 	 * 
@@ -42,8 +48,8 @@ public class GirlController {
 	@GetMapping(value = "/girls")
 	public List<Girl> girlList() {
 		
-		System.out.println("this is girlList function!");
-
+		logger.info("logger.info this is girlList function!");
+		
 		return girlRepository.findAll();
 
 	}
