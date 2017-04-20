@@ -94,4 +94,9 @@ public class HelloController {
 	public String EasyMapping(@RequestParam(value = "id", required = false, defaultValue = "0") Integer myId) {
 		return "EasyMapping id :  " + myId;
 	}
+	
+	@GetMapping(value = "/testUrl")
+	public String testUrl() {
+		return "1122dds";
+	}
 }
