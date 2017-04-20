@@ -159,9 +159,15 @@ public class GirlController {
 
 	}
 
+	// 插入两条数据，运用事务的处理方式解决一条数据出错另一条数据也不能执行的业务逻辑
 	@PostMapping(value = "/girls/insertTwo")
 	public void girlTwo() {
 		girlService.insertTwo();
 	}
 
+	@GetMapping(value = "/girls/getAge/{id}")
+    public void girlListByAge(@PathVariable("id") Integer id) throws Exception {
+        girlService.getAge(id);
+    }
+	
 }

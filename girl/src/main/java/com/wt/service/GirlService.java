@@ -33,5 +33,28 @@ public class GirlService {
 		girlB.setAge(77);
 		girlRepository.save(girlB);
 	}
+	
+	// 通过年龄获取一个对象，之后对获取的对象进行判断
+	// 这里不推荐采用统一的返回值的格式，可以通过抛异常的方式进行，之后异常的处理在controller中进行
+	public void getAge(Integer id) throws Exception{
+		Girl girl = girlRepository.findOne(id);
+
+		System.out.println("33333333333333333" + girl);
+		
+		Integer age = girl.getAge();
+
+		System.out.println("4444444444  " + age);
+		
+		if(age < 10){
+			// 返回小学阶段
+			System.out.println("age < 10");
+			throw new Exception("小学阶段");
+		}else if (age >= 10 && age < 16) {
+			// 返回初中阶段
+			System.out.println("age >= 10 && age < 16");
+			throw new Exception("初中阶段");
+		}
+		
+	}
 
 }
