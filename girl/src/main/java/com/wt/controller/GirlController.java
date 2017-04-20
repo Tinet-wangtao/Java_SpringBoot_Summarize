@@ -79,7 +79,7 @@ public class GirlController {
 	// 添加进行对girl进行验证
 	// 将返回的结果放入到bindingResult对象中
 	@PostMapping(value = "/girlsAddNew")
-	public Girl girlAddNew(@Valid Girl girl, BindingResult bindingResult){
+	public Object girlAddNew(@Valid Girl girl, BindingResult bindingResult){
 //		girl.setCupSize(girl.getCupSize());
 //		girl.setAge(girl.getAge());
 
