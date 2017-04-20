@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.wt.aspect.HttpAspect;
 import com.wt.entity.Girl;
+import com.wt.entity.Result;
 import com.wt.repository.GirlRepository;
 import com.wt.service.GirlService;
 
@@ -33,13 +34,12 @@ public class GirlController {
 
 	@Autowired
 	private GirlRepository girlRepository;
-	
+
 	@Autowired
 	private GirlService girlService;
-	
+
 	private final static Logger logger = LoggerFactory.getLogger(GirlController.class);
 
-	
 	/**
 	 * 查询所有的女生列表
 	 * 
@@ -47,9 +47,9 @@ public class GirlController {
 	 */
 	@GetMapping(value = "/girls")
 	public List<Girl> girlList() {
-		
+
 		logger.info("logger.info this is girlList function!");
-		
+
 		return girlRepository.findAll();
 
 	}
@@ -70,7 +70,7 @@ public class GirlController {
 
 		return girlRepository.save(girl);
 	}
-	
+
 	/**
 	 * 优雅的添加一个女生的方法，简化复杂参数的冗余
 	 * 
@@ -79,21 +79,31 @@ public class GirlController {
 	// 添加进行对girl进行验证
 	// 将返回的结果放入到bindingResult对象中
 	@PostMapping(value = "/girlsAddNew")
-	public Object girlAddNew(@Valid Girl girl, BindingResult bindingResult){
-//		girl.setCupSize(girl.getCupSize());
-//		girl.setAge(girl.getAge());
+	public Result<Girl> girlAddNew(@Valid Girl girl, BindingResult bindingResult) {
+		// girl.setCupSize(girl.getCupSize());
+		// girl.setAge(girl.getAge());
 
 		// 如果验证错误，将把错误的信息打印出来
 		// 此时打印的错误信息为 Girl 实体类中对age进行Min验证限制时写入的错误信息
-		if(bindingResult.hasErrors()){
+		if (bindingResult.hasErrors()) {
 			System.out.println("bindingResult error message : " + bindingResult.getFieldError().getDefaultMessage());
-			
+
+			Result result = new Result();
+			result.setCode(1);
+			result.setMsg(bindingResult.getFieldError().getDefaultMessage());
+			result.setData(null);
+
 			// 既然发生了错误，那么就应该不继续接下来的逻辑
-			return null;
-			
+			return result;
+
 		}
-		
-		return girlRepository.save(girl);
+
+		Result result = new Result();
+		result.setCode(0);
+		result.setMsg("成功");
+		result.setData(girlRepository.save(girl));
+
+		return result;
 	}
 
 	/**
@@ -114,6 +124,7 @@ public class GirlController {
 	 * @param cupSize
 	 * @param age
 	 * @return
+	 * 
 	 */
 	@PutMapping(value = "/girls/{id}")
 	public Girl updateGirl(@PathVariable("id") Integer id, @RequestParam("cupSize") String cupSize,
@@ -134,8 +145,7 @@ public class GirlController {
 	public void updateGirl(@PathVariable("id") Integer id) {
 		girlRepository.delete(id);
 	}
-	
-	
+
 	/**
 	 * 通过年龄查询女生列表
 	 * 
@@ -149,8 +159,8 @@ public class GirlController {
 	}
 
 	@PostMapping(value = "/girls/insertTwo")
-	public void girlTwo(){
+	public void girlTwo() {
 		girlService.insertTwo();
 	}
-	
+
 }
