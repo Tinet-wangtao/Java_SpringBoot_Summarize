@@ -21,6 +21,7 @@ import com.wt.entity.Girl;
 import com.wt.entity.Result;
 import com.wt.repository.GirlRepository;
 import com.wt.service.GirlService;
+import com.wt.util.ResultUtil;
 
 /**
  * 
@@ -88,22 +89,22 @@ public class GirlController {
 		if (bindingResult.hasErrors()) {
 			System.out.println("bindingResult error message : " + bindingResult.getFieldError().getDefaultMessage());
 
-			Result result = new Result();
-			result.setCode(1);
-			result.setMsg(bindingResult.getFieldError().getDefaultMessage());
-			result.setData(null);
+			// Result result = new Result();
+			// result.setCode(1);
+			// result.setMsg(bindingResult.getFieldError().getDefaultMessage());
+			// result.setData(null);
 
 			// 既然发生了错误，那么就应该不继续接下来的逻辑
-			return result;
+			return ResultUtil.error(1, bindingResult.getFieldError().getDefaultMessage());
 
 		}
 
-		Result result = new Result();
-		result.setCode(0);
-		result.setMsg("成功");
-		result.setData(girlRepository.save(girl));
+		// Result result = new Result();
+		// result.setCode(0);
+		// result.setMsg("成功");
+		// result.setData(girlRepository.save(girl));
 
-		return result;
+		return ResultUtil.success(girlRepository.save(girl));
 	}
 
 	/**
