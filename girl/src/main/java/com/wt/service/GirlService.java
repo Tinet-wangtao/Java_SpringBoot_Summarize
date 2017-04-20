@@ -50,17 +50,26 @@ public class GirlService {
 		if (age < 10) {
 			// 返回小学阶段
 			System.out.println("age < 10");
-			throw new GirlException(ResultEnum.PRIMARY_SCHOOL );
+			throw new GirlException(ResultEnum.PRIMARY_SCHOOL);
 		} else if (age >= 10 && age < 16) {
 			// 返回初中阶段
 			System.out.println("age >= 10 && age < 16");
 			throw new GirlException(ResultEnum.MIDDLE_SCHOOL);
-		}else{
+		} else {
 			System.out.println("age >= 16");
 			throw new GirlException(ResultEnum.MID_AGE);
 		}
-		
 
+	}
+
+	/**
+	 * 通过Id查询一个女生的信息
+	 * 
+	 * @param id
+	 * @return
+	 */
+	public Girl findOne(Integer id) {
+		return girlRepository.findOne(id);
 	}
 
 }
